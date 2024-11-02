@@ -1,7 +1,10 @@
 ---
-import "./select.css";
-import "./timer.css";
 ---
+
+<style>
+  @import "./select.css";
+  @import "./timer.css";
+</style>
 
 <div class="selectTimer" id="selectTimerContainer">
 	<div class="demo-preview" id="progBarContainer">
@@ -36,7 +39,6 @@ import "./timer.css";
 	</div>
 </div>
 
-<!-- script -->
 <script>
 	function updateTimer(end: number) {
 		let container = document.getElementById("progBarContainer");
@@ -61,16 +63,13 @@ import "./timer.css";
 			return end.getTime() - start.getTime();
 		}
 
-		// timer
 		var x = setInterval(function () {
 			var distance = getDistance(new Date(), endDate);
 
-			// Time calculations for minutes and seconds
 			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 			var progress = Math.round((Math.trunc(end - minutes - 1) / end) * 100);
 
-			// displaying text
 			let textProgress = document.getElementById("current");
 
 			let minutesInvert = Math.round(end - minutes - 1);
@@ -101,13 +100,12 @@ import "./timer.css";
 
 				textProgress.innerHTML = text;
 			}
-			// for progress bar
+
 			let visualProgress = document.getElementById("progressBar");
 			if (visualProgress) {
 				visualProgress.style.width = `${progress}%`;
 			}
 
-			// If the count down is finished, write some text
 			if (distance < 0 || progressBar?.dataset.end == "0") {
 				clearInterval(x);
 				(document.getElementById("soundCue") as HTMLAudioElement)?.play();
@@ -137,4 +135,3 @@ import "./timer.css";
 		}
 	});
 </script>
-<style></style>
